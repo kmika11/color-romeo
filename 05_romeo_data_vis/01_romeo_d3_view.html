@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="./romeo_sentiment_array.js"></script>
+  </head>
+  <body>
+    <p>romeo sentiment graph</p>
+    <svg width="1000" height="10000"></svg>
+  </body>
+  <script>
+      var baseline = 500;
+      var current_scene = '';
+      d3.
+        select("body").
+        select("svg").
+        selectAll('rect').
+        data(romeo_data).
+        enter()
+          .append("rect")
+          .attr('x', function(d) {
+            if (d['line_polarity'] < 0) {
+              return 500 - (Math.abs(d['line_polarity'])*100) }
+            else {
+              return 500
+            }
+          })
+          .attr('y', function(d, i) { return i })
+          .attr('height', '1')
+          .attr('width', function(d, i) { 
+            if (d['line_polarity'] < 0) {
+              return Math.abs(d['line_polarity'])*100 
+            } else {
+              return d['line_polarity']*100
+            }
+          })
+          .style('fill', function(d) {
+            if (d['act'] == 'ACT I') {
+              return 'red'
+            } else if (d['act'] == 'ACT II') {
+              return 'blue'
+            } else if (d['act'] == 'ACT III') {
+              return 'green'
+            } else if (d['act'] == 'ACT IV') {
+              return 'yellow'
+            } else if (d['act'] == 'ACT V') {
+              return 'orange'
+            }
+          })
+  ;
+
+  </script>
+</html>
