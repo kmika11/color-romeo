@@ -1,3 +1,4 @@
 Gutenberg
 ipython
 nltk
+textblob
