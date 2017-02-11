@@ -16,12 +16,11 @@
         data(romeo_data).
         enter()
           .append("rect")
-          .attr('x', '10')
-          .attr('y', '10')
-          .attr('height', '10')
-          .attr('width', '1000')
+          .attr('x', '1')
+          .attr('y', function(d, i) { return i })
+          .attr('height', '1')
+          .attr('width', function(d, i) { return d['line_polarity']*10 })
           .style('fill', 'blue')
-          .text(function(d,i) { console.log(i); console.log(d); d.title })
   ;
 
   </script>
