@@ -1,0 +1,49 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moby Dick Sentence demo</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="./moby_by_sentence_stats.js"></script>
+  </head>
+  <body>
+    <div data-sticky-container>
+      <div class="top-bar" data-sticky data-options="marginTop:0;" style="width:100%">
+        <div class="top-bar-left">
+          <h2>This is an example sentence</h2>
+        </div>
+        <div class="top-bar-right">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <h1>Moby Dick</h1>
+        <svg width="1000" height="10000"></svg>
+      </div>
+    </div>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      d3.
+        select("body").
+        select("svg").
+        selectAll('rect').
+        data(moby_data).
+        enter()
+          .append("rect")
+          .attr('x', '10')
+          .attr('y', function(d) { return d[0]; })
+          .attr('height', '1')
+          .attr('width', function(d) { return d[2]; })
+          .style('fill', 'blue')
+    ;
+    </script>
+  </body>
+</html>
