@@ -5,10 +5,11 @@
     <script src="./romeo_sentiment_array.js"></script>
   </head>
   <body>
-    <p>Moby Dick Sentence length</p>
+    <p>romeo sentiment graph</p>
     <svg width="1000" height="10000"></svg>
   </body>
   <script>
+      var baseline = 500;
       d3.
         select("body").
         select("svg").
@@ -16,10 +17,16 @@
         data(romeo_data).
         enter()
           .append("rect")
-          .attr('x', '1')
+          .attr('x', function(d) {
+            if (d['line_polarity'] < 0) {
+              return 500 - (d['line_polarity']*10) }
+            else {
+              return 500
+            }
+          })
           .attr('y', function(d, i) { return i })
           .attr('height', '1')
-          .attr('width', function(d, i) { return d['line_polarity']*10 })
+          .attr('width', function(d, i) { return Math.abs(d['line_polarity'])*10 })
           .style('fill', 'blue')
   ;
 
