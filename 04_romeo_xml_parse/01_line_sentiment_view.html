@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="./romeo_with_sentiment.js"></script>
+  </head>
+  <body>
+    <p>Moby Dick Sentence length</p>
+    <svg width="1000" height="10000"></svg>
+  </body>
+  <script>
+      var svg = d3.select('svg');
+      d3.
+        select("body").
+        select("svg").
+        selectAll('rect').
+        data(romeo_data).
+        enter()
+          .append("rect")
+          .attr('x', '10')
+          .attr('y', '10')
+          .attr('height', '10')
+          .attr('width', '1000')
+          .style('fill', 'blue')
+          .text(function(d,i) { console.log(i); console.log(d); d.title })
+  ;
+
+  </script>
+</html>
