@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import json
 import xml.etree.ElementTree as ET
 
-import nltk
-
+import textblob
 
 def parse_xml():
     tree = ET.parse('./romeo_and_juliet_moby.xml')
@@ -26,4 +26,6 @@ def parse_xml():
     return romeo_data
 
 if __name__ == "__main__":
-    print(parse_xml())
+    romeo_data = parse_xml()
+    with open('romeo_with_sentiment.json', 'w') as romeo_json:
+        json.dump(romeo_data, romeo_json)
