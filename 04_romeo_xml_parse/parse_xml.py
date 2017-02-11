@@ -3,7 +3,7 @@
 import json
 import xml.etree.ElementTree as ET
 
-import textblob
+from textblob import TextBlob
 
 def parse_xml():
     tree = ET.parse('./romeo_and_juliet_moby.xml')
@@ -18,7 +18,18 @@ def parse_xml():
                 speaker = speech.find('SPEAKER').text
                 speech_data = {'speaker': speaker, 'lines': []}
                 for line in speech.findall('LINE'):
-                    speech_data['lines'].append(line.text)
+                    line_text = ''
+                    for ll in line.itertext():
+                        line_text = line_text + ll
+
+                    if not line_text:
+                        line_text = ''
+                    text_blob = TextBlob(line_text)
+                    speech_data['lines'].append([
+                        line_text,
+                        text_blob.sentiment.polarity,
+                        text_blob.sentiment.subjectivity
+                    ])
 
                 scene_data['speaches'].append(speech_data)
             act_data['scenes'].append(scene_data)
@@ -28,4 +39,4 @@ def parse_xml():
 if __name__ == "__main__":
     romeo_data = parse_xml()
     with open('romeo_with_sentiment.json', 'w') as romeo_json:
-        json.dump(romeo_data, romeo_json)
+        json.dump(romeo_data, romeo_json, indent=4)
